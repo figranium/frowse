@@ -140,6 +140,8 @@ Independent subagent runs (`o200k_base` CLI output tokens, no shared context) co
 | **Total (All 3 Workflows)** | **19,011** | **74,520** | **74.5%** (**3.9× lower**) |
 
 > **Notes:** Token counts measure exact `o200k_base` CLI stdout/stderr during browser execution (`21,913` total for Frowse if also including initial `frowse skills show` reads). On all three workflows, both independent agents completed the task end-to-end and arrived at identical verified answers (the same 4-device $977.98 Google Pixel ecosystem on Google Store, the same top 3 stories + top comment on Hacker News, and the same `ort` crate metadata on crates.io).
+>
+> **Why more steps?** `agent-browser` takes fewer, much larger steps by dumping full accessibility trees on `snapshot`. Frowse instead uses compact summaries plus targeted micro-queries (`query`, scoped `get text`, `is enabled`, and small `eval` calls)—most responses are under 200 bytes—trading extra small CLI round-trips (and occasional Folate prompt disambiguation or extra stock checks) for **54%–91% fewer context tokens**.
 
 <details>
 <summary>Benchmark prompts</summary>
