@@ -122,6 +122,18 @@ Global flags: `--json`, `--session <name>`, `--headed`, `--timeout <ms>`, `--cdp
 
 ---
 
+## Bundled Agent Skills
+
+Frowse bundles four lightweight, bloat-free `SKILL.md` guides (`frowse`, `frowse-extract`, `frowse-auth`, `frowse-debug`) covering Folate prompting, bulk extraction handoff, auth/sessions, and debugging:
+
+```bash
+frowse skills list                         # List bundled skills
+frowse skills show frowse                  # Print Folate prompting skill
+frowse skills install --target claude      # Install into .claude/skills/ (or agents, codex, cursor)
+```
+
+---
+
 ## License
 
 Frowse is released under the [Apache 2.0 License](https://github.com/figranium/frowse/blob/main/LICENSE).

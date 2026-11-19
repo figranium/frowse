@@ -9,6 +9,7 @@
   "files": [
     "bin/",
     "frowse/",
+    "skills/",
     "pyproject.toml",
     "README.md",
     "LICENSE"

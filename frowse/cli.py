@@ -9,6 +9,7 @@ from typing import Any
 
 from frowse import __version__
 from frowse.client import close_all_sessions, send_command
+from frowse.skills import install_skills, list_skills, read_skill
 
 
 def _split_global_flags(argv: list[str]) -> tuple[dict[str, Any], list[str]]:
@@ -470,6 +471,7 @@ Core Workflow:
   eval <js>
   tab [new|close|<id|label>]
   frame <sel|@ref|main>
+  skills [list|show|install]    Manage bundled Folate & browser skills
   close [--all]
 
 Global Options:
@@ -483,6 +485,49 @@ Global Options:
     )
 
 
+def _run_skills_cli(args: list[str]) -> tuple[dict[str, Any], str]:
+    sub = args[0] if args else "list"
+    rest = args[1:]
+    if sub == "list":
+        items = list_skills()
+        plain = "\n".join(f"{s['name']}: {s['description']}" for s in items)
+        return {"skills": items}, plain
+    if sub == "show":
+        if not rest:
+            raise ValueError("Usage: skills show <name>")
+        content = read_skill(rest[0])
+        return {"name": rest[0], "content": content}, content
+    if sub == "install":
+        target = "agents"
+        global_install = False
+        dest_dir = None
+        names: list[str] = []
+        i = 0
+        while i < len(rest):
+            t = rest[i]
+            if t == "--global":
+                global_install = True
+                i += 1
+            elif t == "--target" and i + 1 < len(rest):
+                target = rest[i + 1]
+                i += 2
+            elif t == "--dir" and i + 1 < len(rest):
+                dest_dir = rest[i + 1]
+                i += 2
+            else:
+                names.append(t)
+                i += 1
+        installed = install_skills(
+            target=target,
+            global_install=global_install,
+            names=names or None,
+            dest_dir=dest_dir,
+        )
+        plain = "\n".join(f"Installed {x['name']} -> {x['path']}" for x in installed)
+        return {"installed": installed}, plain
+    raise ValueError("Usage: skills [list|show <name>|install [--target agents|claude|codex|cursor] [--global] [names...]]")
+
+
 def main(argv: list[str] | None = None) -> None:
     raw = sys.argv[1:] if argv is None else argv
     if not raw or raw[0] in ("-h", "--help", "help"):
@@ -494,10 +539,18 @@ def main(argv: list[str] | None = None) -> None:
 
     opts, rest = _split_global_flags(raw)
     try:
+        if rest and rest[0] == "skills":
+            data, plain = _run_skills_cli(rest[1:])
+            if opts["json"]:
+                print(json.dumps({"ok": True, "data": data}))
+            else:
+                print(plain)
+            return
+
         action, payload = _parse_command(rest)
         if action == "close" and payload.get("all"):
             closed = close_all_sessions()
-            data: dict[str, Any] = {"closed": closed}
+            data = {"closed": closed}
         else:
             daemon_opts = {
                 "headed": opts["headed"],
