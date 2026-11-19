@@ -130,10 +130,10 @@ Independent subagent runs (`o200k_base` CLI output tokens, no shared context) co
 | :--- | :---: | :---: | :---: |
 | **Google Store Pixel Ecosystem (< $1,000)** | **15,154** *(64 steps)* | **59,290** *(41 steps)* | **74.4%** (**3.9× lower**) |
 | **Hacker News Top Stories + Comments** | **761** *(7 steps)* | **8,457** *(5 steps)* | **91.0%** (**11.1× lower**) |
-| **PyPI Search (`folate`, to Client Challenge)** | **550** *(6 steps)* | **1,054** *(6 steps)* | **47.8%** (**1.9× lower**) |
-| **Total (All 3 Workflows)** | **16,465** | **68,801** | **76.1%** (**4.2× lower**) |
+| **crates.io Package Discovery (`ort`)** | **3,096** *(29 steps)* | **6,773** *(12 steps)* | **54.3%** (**2.2× lower**) |
+| **Total (All 3 Workflows)** | **19,011** | **74,520** | **74.5%** (**3.9× lower**) |
 
-> **Notes:** Token counts measure exact `o200k_base` CLI stdout/stderr during browser execution (`19,386` total for Frowse if also including initial `frowse skills show` reads). On both completed workflows, both independent agents arrived at identical answers (the same 4-device $977.98 Google Pixel ecosystem on Google Store and the same top 3 stories + top comment on Hacker News).
+> **Notes:** Token counts measure exact `o200k_base` CLI stdout/stderr during browser execution (`21,913` total for Frowse if also including initial `frowse skills show` reads). On all three workflows, both independent agents completed the task end-to-end and arrived at identical verified answers (the same 4-device $977.98 Google Pixel ecosystem on Google Store, the same top 3 stories + top comment on Hacker News, and the same `ort` crate metadata on crates.io).
 
 <details>
 <summary>Benchmark prompts</summary>
@@ -146,11 +146,11 @@ Independent subagent runs (`o200k_base` CLI output tokens, no shared context) co
    > 2. Find the top 3 stories with at least 50 points (extract title, points, and comment count).
    > 3. Navigate to the comments page of the highest-scoring story among those 3, and extract the top-level first comment's author and a brief summary/excerpt of the comment.
 
-3. **PyPI Search (`folate`):**
-   > 1. Open `https://pypi.org/`
-   > 2. Search for `folate` using the search box.
-   > 3. Open the `folate` package page from the search results.
-   > 4. Extract and report the latest version, release date, license, and Python version requirement. *(Both agents stopped at PyPI's Client Challenge CAPTCHA on the search results page.)*
+3. **crates.io Package Discovery (`ort`):**
+   > 1. Open `https://crates.io/`
+   > 2. Search for `ort` using the search box.
+   > 3. Open the `ort` crate page from the search results.
+   > 4. Extract and report the latest version, release date/time, license, and repository URL (or Rust version/MSRV if shown).
 
 </details>
 
