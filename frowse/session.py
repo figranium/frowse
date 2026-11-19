@@ -5,6 +5,8 @@ from __future__ import annotations
 import os
 import re
 import shutil
+import subprocess
+import sys
 import time
 import urllib.request
 from dataclasses import dataclass, field
@@ -95,12 +97,38 @@ class BrowserSession:
             exe = _find_browser_executable(self.executable_path)
             if exe:
                 launch_kwargs["executable_path"] = exe
-            self._browser = self._pw.chromium.launch(**launch_kwargs)
+            try:
+                self._browser = self._pw.chromium.launch(**launch_kwargs)
+            except Exception as exc:
+                if exe is None and "Executable doesn't exist" in str(exc):
+                    print(
+                        "[frowse] No system Chrome/Chromium found; installing Playwright Chromium...",
+                        file=sys.stderr,
+                    )
+                    try:
+                        subprocess.run(
+                            [sys.executable, "-m", "playwright", "install", "chromium"],
+                            check=True,
+                        )
+                        self._browser = self._pw.chromium.launch(**launch_kwargs)
+                    except Exception as install_exc:
+                        raise RuntimeError(
+                            "Failed to auto-install Chromium. Run "
+                            f"`{sys.executable} -m playwright install chromium`, "
+                            "or pass `--executable-path <path>` / `--cdp <port>`."
+                        ) from install_exc
+                else:
+                    raise
             ctx_kwargs: dict[str, Any] = {
                 "viewport": {"width": self.viewport[0], "height": self.viewport[1]}
             }
             if self.user_agent:
                 ctx_kwargs["user_agent"] = self.user_agent
+            if (
+                os.environ.get("FROWSE_IGNORE_HTTPS_ERRORS") == "1"
+                or os.environ.get("AGENT_BROWSER_IGNORE_HTTPS_ERRORS") == "1"
+            ):
+                ctx_kwargs["ignore_https_errors"] = True
             self._context = self._browser.new_context(**ctx_kwargs)
 
         self._context.set_default_timeout(self.timeout_ms)

@@ -22,3 +22,10 @@ Prefer deterministic waits over fixed sleeps:
 ## Iframes
 
 - `frowse frame "<iframe selector or prompt>"` → run `snapshot` / `click` / `fill` inside the iframe → `frowse frame main` to return.
+
+## Browser Launch & Environment
+
+- **Missing browser executable**: Frowse auto-detects system Chrome/Chromium and auto-installs Playwright Chromium if absent. To install manually: `~/.frowse/venv/bin/python -m playwright install chromium` (or `python -m playwright install chromium`), or pass `--executable-path /path/to/chrome`.
+- **Containers, sandboxes & HTTPS proxies**: If Chromium hits sandbox or `ERR_CERT_AUTHORITY_INVALID` errors, set `FROWSE_IGNORE_HTTPS_ERRORS=1` or launch Chrome directly and attach via CDP:
+  `google-chrome --headless=new --no-sandbox --remote-debugging-port=9222 --ignore-certificate-errors about:blank &`
+  `frowse --cdp 9222 open <url>`
