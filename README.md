@@ -40,13 +40,7 @@ Instead of dumping full accessibility trees or hundreds of `@eN` element referen
 
 ### Installation
 
-Install via **pip** (Python 3.10+):
-
-```bash
-pip install frowse
-```
-
-Or install globally via **npm**:
+Install globally via **npm** (recommended):
 
 ```bash
 npm install -g frowse
@@ -59,6 +53,12 @@ npx frowse open https://example.com
 ```
 
 > **Note:** Frowse requires Python 3.10+ on `PATH`. On first run, the CLI automatically provisions an isolated environment in `~/.frowse/venv` if `frowse` is not already installed.
+
+Or install directly via **pip**:
+
+```bash
+pip install frowse
+```
 
 Or install from source:
 
