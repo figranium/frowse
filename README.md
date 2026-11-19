@@ -40,7 +40,13 @@ Instead of dumping full accessibility trees or hundreds of `@eN` element referen
 
 ### Installation
 
-Install globally via **npm**:
+Install via **pip** (Python 3.10+):
+
+```bash
+pip install frowse
+```
+
+Or install globally via **npm**:
 
 ```bash
 npm install -g frowse
