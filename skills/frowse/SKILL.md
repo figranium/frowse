@@ -29,5 +29,5 @@ Folate ranks elements by matching your prompt against `[TAG]`, `[TYPE]`, `[PLACE
 ## Handling Edge Cases
 
 - **Collapsed items (`+N more`)**: If you already know the target's name, query Folate directly (it scans the full DOM). To browse hidden items, scope with `frowse snapshot --section "main"`.
-- **Repeated identical buttons (`"Add to cart" (x30)`)**: Folate cannot tell identical siblings apart; use `frowse snapshot --refs` and `click @eN` or a specific CSS selector.
+- **Repeated identical buttons (`"Add to cart" (x30)`)**: Folate cannot disambiguate identical buttons across cards/rows. Click the item's unique title/detail link first (e.g. `frowse click "Anker Soundcore Q20i link"`), then click `"Add to Cart button"` on the detail page. If there is no detail page, use `frowse snapshot --refs` (`click @eN`) or a scoped CSS selector.
 - **Structured output**: Add `--json` to any command to get `{ok, data: {resolvedBy, selector, score, ...}}`.
