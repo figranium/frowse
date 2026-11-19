@@ -28,6 +28,8 @@ Folate ranks elements by matching your prompt against `[TAG]`, `[TYPE]`, `[PLACE
 
 ## Handling Edge Cases
 
-- **Collapsed items (`+N more`)**: If you already know the target's name, query Folate directly (it scans the full DOM). To browse hidden items, scope with `frowse snapshot --section "main"`.
-- **Repeated identical buttons (`"Add to cart" (x30)`)**: Folate cannot disambiguate identical buttons across cards/rows. Click the item's unique title/detail link first (e.g. `frowse click "Anker Soundcore Q20i link"`), then click `"Add to Cart button"` on the detail page. If there is no detail page, use `frowse snapshot --refs` (`click @eN`) or a scoped CSS selector.
-- **Structured output**: Add `--json` to any command to get `{ok, data: {resolvedBy, selector, score, ...}}`.
+- **Collapsed items (`+N more`)**: Query Folate directly if you know the target's name, or browse with `frowse snapshot --section "main"`.
+- **Never dump `get text body` / `get html body`**: `body` pulls navbars, footers, and boilerplate. Read only what you need via targeted `get text "#buybox"` / `get text "price in main"` or a compact `eval` returning `{title, price, ...}`.
+- **Generic labels on complex pages**: If `"Go"` or `"Submit"` appears in multiple regions, include the landmark (`"Go button in header site-search"`).
+- **Repeated buttons (`"Add to cart" (x30)`)**: Click the item's unique title link first (`frowse click "Anker Soundcore Q20i link"`), then `"Add to Cart button"` on the detail page, or use `snapshot --refs` (`click @eN`).
+- **Structured output**: Add `--json` to get `{ok, data: {resolvedBy, selector, score, ...}}`.

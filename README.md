@@ -122,6 +122,21 @@ Global flags: `--json`, `--session <name>`, `--headed`, `--timeout <ms>`, `--cdp
 
 ---
 
+## Benchmarks
+
+Independent subagent runs (`o200k_base` CLI output tokens, no shared context) comparing **Frowse** (`0.1.0` with bundled `frowse` & `frowse-extract` skills) against **`agent-browser`** (`0.43.0`) across three real-world workflows:
+
+| Workflow | Frowse (`o200k` tokens) | `agent-browser` (`o200k` tokens) | Token Reduction |
+| :--- | :---: | :---: | :---: |
+| **Google Store Pixel Ecosystem (< $1,000)** | **15,154** *(64 steps)* | **59,290** *(41 steps)* | **74.4%** (**3.9× lower**) |
+| **Hacker News Top Stories + Comments** | **761** *(7 steps)* | **8,457** *(5 steps)* | **91.0%** (**11.1× lower**) |
+| **PyPI Search (`folate`, to Client Challenge)** | **550** *(6 steps)* | **1,054** *(6 steps)* | **47.8%** (**1.9× lower**) |
+| **Total (All 3 Workflows)** | **16,465** | **68,801** | **76.1%** (**4.2× lower**) |
+
+> **Notes:** Token counts measure exact `o200k_base` CLI stdout/stderr during browser execution (`19,386` total for Frowse if also including initial `frowse skills show` reads). On both completed workflows, both independent agents arrived at identical answers (the same 4-device $977.98 Google Pixel ecosystem on Google Store and the same top 3 stories + top comment on Hacker News).
+
+---
+
 ## Bundled Agent Skills
 
 Frowse bundles four lightweight, bloat-free `SKILL.md` guides (`frowse`, `frowse-extract`, `frowse-auth`, `frowse-debug`) covering Folate prompting, bulk extraction handoff, auth/sessions, and debugging:

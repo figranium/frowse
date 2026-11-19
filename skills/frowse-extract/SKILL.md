@@ -7,9 +7,10 @@ description: Extract text, attributes, and structured data with frowse, or hand 
 
 ## Single-Page Extraction
 
-- **Full readable text**: `frowse read` (active tab) or `frowse read <url>` (fetches without launching Chrome).
+- **Avoid `get text body` / `get html body`**: `body` dumps navbars, footers, and boilerplate, wiping out snapshot token savings. Always target a specific element or container (`frowse get text "#buybox"`, `frowse get text "price"`, `frowse get text "main"`).
+- **Readable article text**: `frowse read` (active tab) or `frowse read <url>` (fetches without launching Chrome).
 - **Specific element**: `frowse get text "<folate prompt or CSS>"`, `frowse get attr "<sel>" href`, `frowse get value "<sel>"`, `frowse get count "<sel>"`.
-- **DOM queries via JS**: `frowse eval "Array.from(document.querySelectorAll('.card h2')).map(e => e.innerText)"`
+- **Compact DOM queries via JS**: `frowse eval "Array.from(document.querySelectorAll('.card')).slice(0,10).map(e => ({title: e.querySelector('h2')?.innerText, price: e.querySelector('.price')?.innerText}))"`
 
 ## Hybrid Bulk Workflow (Lowest Token Cost)
 

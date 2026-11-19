@@ -481,7 +481,9 @@ Global Options:
   --timeout <ms>                Default timeout in ms (default: 15000)
   --cdp <port|url>              Connect to existing browser over CDP
   --viewport <w>x<h>            Viewport size (default: 1280x800)
-  --model-dir <path>            Local Folate ONNX model directory"""
+  --model-dir <path>            Local Folate ONNX model directory
+
+Tip: Avoid `get text body`; use `snapshot --section main`, targeted `get text <prompt|sel>`, or compact `eval`."""
     )
 
 
