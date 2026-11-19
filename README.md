@@ -135,6 +135,25 @@ Independent subagent runs (`o200k_base` CLI output tokens, no shared context) co
 
 > **Notes:** Token counts measure exact `o200k_base` CLI stdout/stderr during browser execution (`19,386` total for Frowse if also including initial `frowse skills show` reads). On both completed workflows, both independent agents arrived at identical answers (the same 4-device $977.98 Google Pixel ecosystem on Google Store and the same top 3 stories + top comment on Hacker News).
 
+<details>
+<summary>Benchmark prompts</summary>
+
+1. **Google Store Pixel Ecosystem (< $1,000):**
+   > On the Google Store (`https://store.google.com/us/?hl=en-US`), find a full Google Pixel ecosystem (Pixel phone, Pixel Watch, and Pixel Buds — plus any other Google Pixel device if it fits) for under $1,000 total (pre-tax), with ONLY: (1) Brand new items (full outright purchase price, no trade-in), (2) Google-branded items only, (3) Sold & fulfilled directly by Google Store. Verify each item's exact configuration, outright price, and URL on its product/configurator page.
+
+2. **Hacker News Top Stories + Comments:**
+   > 1. Open `https://news.ycombinator.com/`
+   > 2. Find the top 3 stories with at least 50 points (extract title, points, and comment count).
+   > 3. Navigate to the comments page of the highest-scoring story among those 3, and extract the top-level first comment's author and a brief summary/excerpt of the comment.
+
+3. **PyPI Search (`folate`):**
+   > 1. Open `https://pypi.org/`
+   > 2. Search for `folate` using the search box.
+   > 3. Open the `folate` package page from the search results.
+   > 4. Extract and report the latest version, release date, license, and Python version requirement. *(Both agents stopped at PyPI's Client Challenge CAPTCHA on the search results page.)*
+
+</details>
+
 ---
 
 ## Bundled Agent Skills
