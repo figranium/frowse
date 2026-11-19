@@ -4,8 +4,8 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/frowse">npm</a> •
+  <a href="https://pypi.org/project/frowse/">PyPI</a> •
   <a href="https://github.com/figranium/folate">Folate</a> •
-  <a href="https://huggingface.co/figranium/folate">Hugging Face</a> •
   <a href="https://github.com/figranium/frowse/blob/main/LICENSE">Apache 2.0</a>
 </p>
 
