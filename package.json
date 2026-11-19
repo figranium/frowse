@@ -1,6 +1,6 @@
 {
   "name": "frowse",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Drop-in replacement for agent-browser powered by Folate local DOM grounding and ultra-lightweight DOM summaries",
   "bin": {
     "frowse": "./bin/frowse.js",

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner.png" alt="Frowse" width="100%">
+  <img src="https://raw.githubusercontent.com/figranium/frowse/main/banner.png" alt="Frowse" width="100%">
 </p>
 
 <p align="center">
