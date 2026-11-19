@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "frowse"
-version = "0.1.1"
+version = "0.1.2"
 description = "Drop-in replacement for agent-browser powered by Folate local DOM grounding and ultra-lightweight DOM summaries"
 readme = "README.md"
 license = {text = "Apache-2.0"}
