@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+.pytest_cache/
+folate-int8/
+*.png
+!banner.png
+*.pdf
+*.har
+node_modules/

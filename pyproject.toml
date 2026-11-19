@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frowse"
+version = "0.1.0"
+description = "Drop-in replacement for agent-browser powered by Folate local DOM grounding and ultra-lightweight DOM summaries"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "folate>=0.1.1",
+    "playwright>=1.45.0",
+    "lxml>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[project.scripts]
+frowse = "frowse.cli:main"
+agent-browser = "frowse.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["frowse*"]
