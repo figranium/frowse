@@ -142,7 +142,7 @@ Global flags: `--json`, `--session <name>`, `--headed`, `--timeout <ms>`, `--cdp
 
 ## Benchmarks
 
-Independent subagent runs (`o200k_base` CLI output tokens, no shared context) comparing **Frowse** (`0.1.0` with bundled `frowse` & `frowse-extract` skills) against **`agent-browser`** (`0.43.0`) across three real-world workflows:
+Independent subagent runs with **Gemini 4 Hydrogen Medium** in **Antigravity Cloud** (`o200k_base` CLI output tokens, no shared context) comparing **Frowse** (`0.1.0` with bundled `frowse` & `frowse-extract` skills) against **`agent-browser`** (`0.43.0`) across three real-world workflows:
 
 | Workflow | Frowse (`o200k` tokens) | `agent-browser` (`o200k` tokens) | Token Reduction |
 | :--- | :---: | :---: | :---: |
