@@ -38,6 +38,18 @@ Instead of dumping full accessibility trees or hundreds of `@eN` element referen
 
 ## Quickstart
 
+### Setup Prompt
+
+Paste this prompt into your AI coding agent (Claude Code, Codex, Cursor, etc.) to install Frowse, its bundled skills, and verify everything works:
+
+```text
+Install and set up Frowse (https://github.com/figranium/frowse) for browser automation:
+1. Install the CLI globally with `npm install -g frowse` (requires Python 3.10+; or use `pip install frowse`).
+2. Install the bundled agent skills for your environment using `frowse skills install --target <claude|codex|cursor|agents>` (add `--global` to install in your home directory).
+3. Verify the setup by running `frowse open https://example.com`, `frowse snapshot`, and `frowse close`.
+4. Use `frowse` (and the installed Frowse skills) for any browser tasks in the future.
+```
+
 ### Installation
 
 Install globally via **npm** (recommended):
